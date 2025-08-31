@@ -7,6 +7,7 @@ import './App.css';
 
 function App() {
   const [activeSection, setActiveSection] = useState('knowledge-base');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const renderMainContent = () => {
     switch (activeSection) {
@@ -21,9 +22,32 @@ function App() {
     }
   };
 
+  const handleSectionChange = (section: string) => {
+    setActiveSection(section);
+    setSidebarOpen(false); // Close sidebar on mobile after selection
+  };
+
   return (
     <div className="App">
-      <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
+      <button
+        className={`hamburger-menu ${sidebarOpen ? 'open' : ''}`}
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        aria-label="Toggle menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div
+        className={`sidebar-overlay ${sidebarOpen ? '' : 'hidden'}`}
+        onClick={() => setSidebarOpen(false)}
+      ></div>
+      <Sidebar
+        activeSection={activeSection}
+        onSectionChange={handleSectionChange}
+        isOpen={sidebarOpen}
+        onToggle={() => setSidebarOpen(!sidebarOpen)}
+      />
       <main className="main-content">
         {renderMainContent()}
       </main>

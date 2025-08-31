@@ -3,6 +3,27 @@
   margin-left: 250px; /* Account for fixed sidebar */
 }
 
+/* Mobile styles */
+@media (max-width: 767px) {
+  .knowledge-base {
+    margin-left: 0;
+    padding: 15px;
+    padding-top: 60px; /* Make room for hamburger menu */
+  }
+
+  .knowledge-base h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .knowledge-base {
+    margin-left: 200px;
+  }
+}
+
 .knowledge-base h1 {
   color: #495057;
   margin-bottom: 10px;

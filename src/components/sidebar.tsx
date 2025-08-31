@@ -4,13 +4,15 @@ import './sidebar.css';
 interface SidebarProps {
   activeSection: string;
   onSectionChange: (section: string) => void;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange }) => {
+const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange, isOpen, onToggle }) => {
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
-        <h2>Admin Dashboard</h2>
+        <h2> A Scribble In Time Admin Dashboard</h2>
       </div>
       <nav className="sidebar-nav">
         <button

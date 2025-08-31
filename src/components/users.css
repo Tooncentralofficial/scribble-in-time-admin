@@ -20,6 +20,57 @@
   flex-wrap: wrap;
 }
 
+/* Mobile styles */
+@media (max-width: 767px) {
+  .users {
+    margin-left: 0;
+    padding: 15px;
+    padding-top: 60px; /* Make room for hamburger menu */
+  }
+
+  .users h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .submissions-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .submissions-table th,
+  .submissions-table td {
+    white-space: nowrap;
+    min-width: 120px;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .users {
+    margin-left: 200px;
+  }
+
+  .filters {
+    gap: 8px;
+  }
+
+  .filters input,
+  .filters select {
+    font-size: 13px;
+  }
+}
+
 .filters input,
 .filters select {
   padding: 8px;
