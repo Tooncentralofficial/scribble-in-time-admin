@@ -30,7 +30,13 @@ const KnowledgeBase: React.FC = () => {
         if (!response.ok) {
           const errorData = await response.json();
           console.error('Upload failed for', file.name, ':', errorData);
-          alert(`Upload failed for ${file.name}: ${errorData.error || 'Unknown error'}`);
+          
+          let errorMessage = errorData.error || 'Unknown error';
+          if (errorMessage.includes('unexpected keyword arguments')) {
+            errorMessage = 'Backend configuration error. Please contact the administrator.';
+          }
+          
+          alert(`Upload failed for ${file.name}: ${errorMessage}`);
           setUploading(false);
           return;
         }

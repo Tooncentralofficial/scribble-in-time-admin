@@ -132,36 +132,38 @@ const Users: React.FC = () => {
         <p>Loading...</p>
       ) : (
         <>
-          <table className="submissions-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Theme</th>
-                <th>Subject</th>
-                <th>Audience</th>
-                <th>Submitted At</th>
-                <th>Processed</th>
-              </tr>
-            </thead>
-            <tbody>
-              {submissions.map((sub) => (
-                <tr key={sub.id}>
-                  <td>{sub.id}</td>
-                  <td>{sub.first_name} {sub.last_name}</td>
-                  <td>{sub.email}</td>
-                  <td>{sub.phone_number}</td>
-                  <td>{sub.theme}</td>
-                  <td>{sub.subject}</td>
-                  <td>{sub.audience}</td>
-                  <td>{new Date(sub.submitted_at).toLocaleDateString()}</td>
-                  <td>{sub.is_processed ? 'Yes' : 'No'}</td>
+          <div className="table-wrapper">
+            <table className="submissions-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Theme</th>
+                  <th>Subject</th>
+                  <th>Audience</th>
+                  <th>Submitted At</th>
+                  <th>Processed</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {submissions.map((sub) => (
+                  <tr key={sub.id}>
+                    <td>{sub.id}</td>
+                    <td>{sub.first_name} {sub.last_name}</td>
+                    <td>{sub.email}</td>
+                    <td>{sub.phone_number}</td>
+                    <td>{sub.theme}</td>
+                    <td>{sub.subject}</td>
+                    <td>{sub.audience}</td>
+                    <td>{new Date(sub.submitted_at).toLocaleDateString()}</td>
+                    <td>{sub.is_processed ? 'Yes' : 'No'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           {pagination && (
             <div className="pagination">
