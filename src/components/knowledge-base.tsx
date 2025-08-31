@@ -15,21 +15,36 @@ const KnowledgeBase: React.FC = () => {
     if (files.length === 0) return;
 
     setUploading(true);
-    try {
-      const formData = new FormData();
-      files.forEach(file => formData.append('files', file));
-      const response = await fetch(`${API_BASE_URL}/api/chat/documents/upload/`, { method: 'POST', body: formData });
-      if (response.ok) {
-        alert('Files uploaded successfully!');
-        setFiles([]);
-      } else {
-        alert('Upload failed.');
+    
+    // Upload files one by one since API expects single file
+    for (const file of files) {
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        const response = await fetch(`${API_BASE_URL}/api/chat/documents/upload/`, {
+          method: 'POST',
+          body: formData
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Upload failed for', file.name, ':', errorData);
+          alert(`Upload failed for ${file.name}: ${errorData.error || 'Unknown error'}`);
+          setUploading(false);
+          return;
+        }
+      } catch (error) {
+        console.error('Upload error for', file.name, ':', error);
+        alert(`Upload error for ${file.name}`);
+        setUploading(false);
+        return;
       }
-    } catch (error) {
-      alert('Upload error.');
-    } finally {
-      setUploading(false);
     }
+    
+    alert('All files uploaded successfully!');
+    setFiles([]);
+    setUploading(false);
   };
 
   return (
