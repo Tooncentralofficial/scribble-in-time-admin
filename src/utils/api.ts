@@ -1,0 +1,1 @@
+export const API_BASE_URL = 'https://scribble-in-time-backend-production.up.railway.app';

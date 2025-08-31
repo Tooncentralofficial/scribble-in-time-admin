@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Sidebar from './components/sidebar';
+import KnowledgeBase from './components/knowledge-base';
+import Conversation from './components/conversation';
+import Users from './components/users';
 import './App.css';
 
 function App() {
+  const [activeSection, setActiveSection] = useState('knowledge-base');
+
+  const renderMainContent = () => {
+    switch (activeSection) {
+      case 'knowledge-base':
+        return <KnowledgeBase />;
+      case 'conversation':
+        return <Conversation />;
+      case 'users':
+        return <Users />;
+      default:
+        return <KnowledgeBase />;
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
+      <main className="main-content">
+        {renderMainContent()}
+      </main>
     </div>
   );
 }
